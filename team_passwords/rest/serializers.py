@@ -8,10 +8,10 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     #parent = GroupSerializer
     class Meta:
         model = Group
-        fields = ('name', 'parent')
+        fields = ('id', 'name', 'parent')
 
 class SiteSerializer(serializers.HyperlinkedModelSerializer):
-    group = GroupSerializer
+    group = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model=Site
-        fields = ('group', 'name', 'description', 'user', 'password', 'url')
+        fields = ('id', 'group', 'name', 'description', 'user', 'password', 'url')
