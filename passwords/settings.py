@@ -129,3 +129,8 @@ REST_FRAMEWORK = {
     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
     'MAX_PAGINATE_BY': 100             # Maximum limit allowed when using `?page_size=xxx`.
 }
+
+
+#JWT_AUTH = {
+#    'JWT_PAYLOAD_GET_USER_ID_HANDLER':'passwords.utils.jwt_response_payload_handler'
+#}
