@@ -3,13 +3,10 @@ from rest_framework import serializers
 
 __author__ = 'dracks'
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'is_staff')
-
 def jwt_response_payload_handler(token, user=None, request=None):
+    from passwords.settings import JWT_AUTH
+
     return {
         'token': token,
-        'user':UserSerializer(user).data
+        'life_time':JWT_AUTH['JWT_EXPIRATION_DELTA'].total_seconds()
     }
