@@ -1,4 +1,4 @@
-
+from rest_framework import filters
 from rest_framework.views import APIView
 
 __author__ = 'dracks'
@@ -12,6 +12,8 @@ from rest_framework.response import Response
 class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'description')
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
