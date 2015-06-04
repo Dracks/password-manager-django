@@ -1,7 +1,5 @@
 __author__ = 'dracks'
 
-from tastypie.api import Api
-
 from django.conf.urls import include, url
 
 #from team_passwords.api.resources import SiteResource
