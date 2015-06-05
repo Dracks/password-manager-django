@@ -12,7 +12,8 @@ from rest_framework.response import Response
 class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter, filters.DjangoFilterBackend)
+    filter_fields = ('group', )
     search_fields = ('name', 'description')
 
 class GroupViewSet(viewsets.ModelViewSet):
