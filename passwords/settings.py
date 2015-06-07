@@ -40,7 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'team_passwords',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'mptt'
 )
 
 MIDDLEWARE_CLASSES = (
