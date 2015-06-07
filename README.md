@@ -7,10 +7,12 @@ don't work on my computer.
 ## Requirements
 The following libraries are required
 
-* Django (1.8.2)
-* django-cors-headers (1.1.0)
-* djangorestframework (3.1.2)
-* djangorestframework-jwt (1.5.0)
+* Django 
+* django-cors-headers 
+* djangorestframework 
+* djangorestframework-jwt 
+* django-mptt 
+* django-filter
   
 
 ## Installation
@@ -23,7 +25,6 @@ import os, sys
 
 #Calculate the path based on the location of the WSGI script.
 apache_configuration= os.path.dirname(__file__)
-#project = os.path.dirname(apache_configuration)
 workspace = os.path.dirname(apache_configuration)
 activate_this=apache_configuration+'/venv/bin/activate_this.py'
 execfile(activate_this, dict(__file__=activate_this))
