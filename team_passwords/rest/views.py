@@ -1,5 +1,6 @@
 from rest_framework import filters, status
 from rest_framework.views import APIView
+from team_passwords.filters import SiteGroupFilter
 
 __author__ = 'dracks'
 
@@ -12,8 +13,9 @@ from rest_framework.response import Response
 class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
-    filter_backends = (filters.SearchFilter, filters.DjangoFilterBackend)
-    filter_fields = ('group',)
+    filter_backends = (filters.SearchFilter, SiteGroupFilter)
+    #filter_fields = ('group',)
+    filter_class = SiteGroupFilter
     search_fields = ('name', 'description')
 
 
@@ -21,17 +23,23 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+    def retrieve(self, request, *args, **kwargs):
+        self.queryset=Group.objects.all()
+
+        return viewsets.ModelViewSet.retrieve(self, request, args, kwargs)
+
     def list(self, request, *args, **kwargs):
+        self.queryset=self.get_list_queryset()
         try:
             return viewsets.ModelViewSet.list(self, request, args, kwargs)
         except Group.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-    def get_queryset(self):
+    def get_list_queryset(self):
         parent = self.request.query_params.get('parent', None)
         show_tree = self.request.query_params.get('show_tree', False)
 
-        if parent is not None:
+        if parent is not None and parent != '':
             obj=Group.objects.get(pk=parent)
 
             if show_tree:
