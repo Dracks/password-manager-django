@@ -18,5 +18,5 @@ class SiteSerializer(serializers.HyperlinkedModelSerializer):
     group = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all())
 
     class Meta:
-        model=Site
+        model = Site
         fields = ('id', 'group', 'name', 'description', 'user', 'password', 'url')

@@ -24,12 +24,12 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        self.queryset=Group.objects.all()
+        self.queryset = Group.objects.all()
 
         return viewsets.ModelViewSet.retrieve(self, request, args, kwargs)
 
     def list(self, request, *args, **kwargs):
-        self.queryset=self.get_list_queryset()
+        self.queryset = self.get_list_queryset()
         try:
             return viewsets.ModelViewSet.list(self, request, args, kwargs)
         except Group.DoesNotExist:
@@ -40,7 +40,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         show_tree = self.request.query_params.get('show_tree', False)
 
         if parent is not None and parent != '':
-            obj=Group.objects.get(pk=parent)
+            obj = Group.objects.get(pk=parent)
 
             if show_tree:
                 return obj.get_descendants()
@@ -51,7 +51,6 @@ class GroupViewSet(viewsets.ModelViewSet):
                 return Group.objects.all()
             else:
                 return Group.objects.filter(parent=None)
-
 
 
 class TestView(APIView):
