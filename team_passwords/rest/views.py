@@ -8,6 +8,7 @@ from team_passwords.models import Site, Group
 from team_passwords.rest.serializers import SiteSerializer, GroupSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
+from oauth2_provider.ext.rest_framework import permissions
 
 
 class SiteViewSet(viewsets.ModelViewSet):
