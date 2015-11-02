@@ -10,3 +10,7 @@ db = {
         'NAME': os.path.join(BASE_DIR, 'devel.sqlite3'),
     }
 }
+
+cors = (
+        'localhost:4200',
+    )

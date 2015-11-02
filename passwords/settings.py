@@ -60,9 +60,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'passwords.urls'
 
-CORS_ORIGIN_WHITELIST = (
-        'localhost:4200',
-    )
+CORS_ORIGIN_WHITELIST = config.cors
 
 
 TEMPLATES = [
