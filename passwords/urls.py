@@ -39,7 +39,7 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     #url(r'^api/', include(router.urls)),
-    #url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
+    url(r'^oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'^api-token/auth', 'rest_framework_jwt.views.obtain_jwt_token'),
     url(r'^api-token/refresh', 'rest_framework_jwt.views.refresh_jwt_token'),
     url(r'^api-token/verify', 'rest_framework_jwt.views.verify_jwt_token'),
