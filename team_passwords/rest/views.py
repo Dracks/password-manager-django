@@ -14,7 +14,6 @@ class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
     filter_backends = (filters.SearchFilter, SiteGroupFilter)
-    #filter_fields = ('group',)
     filter_class = SiteGroupFilter
     search_fields = ('name', 'description', 'user')
 
