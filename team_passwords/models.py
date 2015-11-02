@@ -1,5 +1,5 @@
 from django.db import models
-#from passwords.fields import EncryptedCharField
+# from passwords import fields
 # Create your models here.
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -11,12 +11,14 @@ class Group(MPTTModel):
     def __unicode__(self):
         return self.name
 
+
 class Site(models.Model):
     group = models.ForeignKey(Group, blank=True, null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     user = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
+    # password_crypt = fields.EncryptedTextField(blank=True)
     url = models.CharField(max_length=200, blank=True)
 
     def __unicode__(self):
