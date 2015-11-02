@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import datetime
+import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,7 +41,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'team_passwords',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'mptt',
+    'oauth2_provider'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,12 +87,7 @@ WSGI_APPLICATION = 'passwords.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'devel.sqlite3'),
-    }
-}
+DATABASES = config.db
 
 CORS_ALLOW_HEADERS = (
         'x-requested-with',
@@ -120,11 +118,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
     ),
     'PAGE_SIZE': 10,
     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
