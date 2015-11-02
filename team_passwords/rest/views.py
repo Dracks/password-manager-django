@@ -16,7 +16,7 @@ class SiteViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter, SiteGroupFilter)
     #filter_fields = ('group',)
     filter_class = SiteGroupFilter
-    search_fields = ('name', 'description')
+    search_fields = ('name', 'description', 'user')
 
 
 class GroupViewSet(viewsets.ModelViewSet):
