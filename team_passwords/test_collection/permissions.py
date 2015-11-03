@@ -13,9 +13,9 @@ class PermissionsTestCase(TestCase):
         self.group2 = models.Group.objects.create(parent=self.group1)
         self.group3 = models.Group.objects.create(parent=self.group2)
         self.group4 = models.Group.objects.create()
-        models.GroupUserPermission.objects.create(user=self.user1, group=self.group1, access=1)
-        models.GroupUserPermission.objects.create(user=self.user1, group=self.group3, access=2)
-        models.GroupUserPermission.objects.create(user=self.user2, group=self.group3, access=0)
+        models.GroupUserPermission.objects.create(user=self.user1, group=self.group1, permission=1)
+        models.GroupUserPermission.objects.create(user=self.user1, group=self.group3, permission=2)
+        models.GroupUserPermission.objects.create(user=self.user2, group=self.group3, permission=0)
 
 
     def test_self(self):

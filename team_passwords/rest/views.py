@@ -4,8 +4,9 @@ from team_passwords.filters import SiteGroupFilter
 
 __author__ = 'dracks'
 
-from team_passwords.models import Site, Group
+from team_passwords.models import Site, Group, GroupUserPermission
 from team_passwords.rest.serializers import SiteSerializer, GroupSerializer
+from team_passwords.permissions import GroupHasPermissions, SiteHasPermissions, get_group_permissions
 from rest_framework import viewsets
 from rest_framework.response import Response
 from oauth2_provider.ext.rest_framework import permissions
@@ -14,14 +15,20 @@ from oauth2_provider.ext.rest_framework import permissions
 class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
+    permission_classes = (SiteHasPermissions,)
     filter_backends = (filters.SearchFilter, SiteGroupFilter)
     filter_class = SiteGroupFilter
     search_fields = ('name', 'description', 'user')
+
+    def get_queryset(self):
+        groups = GroupUserPermission.get_all_groups_read(self.request.user)
+        return Site.objects.filter(group__in=groups)
 
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = (GroupHasPermissions,)
 
     def retrieve(self, request, *args, **kwargs):
         self.queryset = Group.objects.all()
@@ -41,16 +48,18 @@ class GroupViewSet(viewsets.ModelViewSet):
 
         if parent is not None and parent != '':
             obj = Group.objects.get(pk=parent)
-
-            if show_tree:
-                return obj.get_descendants()
-            else:
-                return obj.get_children()
+            permission = get_group_permissions(self.request.user, obj)
+            if permission is not None and permission > 0:
+                if show_tree:
+                    return obj.get_descendants()
+                else:
+                    return obj.get_children()
+            return Group.objects.none()
         else:
             if show_tree:
-                return Group.objects.all()
+                return GroupUserPermission.get_all_groups_read(self.request.user)
             else:
-                return Group.objects.filter(parent=None)
+                return GroupUserPermission.get_parent_groups_read(self.request.user)
 
 
 class TestView(APIView):

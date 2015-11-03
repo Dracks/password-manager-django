@@ -9,6 +9,7 @@ from rest_framework import serializers
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     parent = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all(), allow_null=True)
     children = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
+    #access = serializers.ManyRelatedField()
 
     class Meta:
         model = Group
