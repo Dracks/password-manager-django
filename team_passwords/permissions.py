@@ -1,3 +1,5 @@
+from team_passwords.models import GroupUserPermission
+
 __author__ = 'dracks'
 
 from rest_framework import permissions
@@ -24,17 +26,22 @@ class GroupHasPermissions(permissions.IsAuthenticated):
         # so we'll always allow GET, HEAD or OPTIONS requests.
         permission = get_group_permissions(request.user, obj)
         if request.method in permissions.SAFE_METHODS:
-            return permission is not None and permission >= 1
+            if permission is not None and permission >= 1:
+                return True
+            else:
+                list_parents = GroupUserPermission.get_parent_groups_read(request.user)
+                descendant = obj.get_descendants()
+                return any(map(lambda d: d in list_parents, descendant))
 
-            # Write permissions are only allowed to the owner of the snippet.
-        return permission is not None and permission >=3
+                # Write permissions are only allowed to the owner of the snippet.
+        return permission is not None and permission >= 3
+
 
 class SiteHasPermissions(permissions.IsAuthenticated):
     def has_object_permission(self, request, view, obj):
-
         permission = get_group_permissions(request.user, obj.group)
         if request.method in permissions.SAFE_METHODS:
             return permission is not None and permission >= 1
 
             # Write permissions are only allowed to the owner of the snippet.
-        return permission is not None and permission >=2
+        return permission is not None and permission >= 2
