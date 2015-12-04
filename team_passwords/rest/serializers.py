@@ -1,8 +1,7 @@
-from mptt.forms import MoveNodeForm
-
 __author__ = 'dracks'
 
-from team_passwords.models import Site, Group
+from team_passwords.models import Site, Group, GroupUserPermission
+from team_passwords.permissions import get_group_permissions
 from rest_framework import serializers
 
 
@@ -10,10 +9,14 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     parent = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all(), allow_null=True)
     children = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
     #access = serializers.ManyRelatedField()
+    my_permission = serializers.SerializerMethodField(method_name="my_permission_func")
+
+    def my_permission_func(self, obj):
+        return get_group_permissions(self.context['request'].user, obj)
 
     class Meta:
         model = Group
-        fields = ('id', 'name', 'parent', 'children')
+        fields = ('id', 'name', 'parent', 'children', 'my_permission')
 
 class SiteSerializer(serializers.HyperlinkedModelSerializer):
     group = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all())
