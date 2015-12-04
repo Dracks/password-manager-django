@@ -3,6 +3,7 @@ __author__ = 'dracks'
 from team_passwords.models import Site, Group, GroupUserPermission
 from team_passwords.permissions import get_group_permissions
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,3 +25,10 @@ class SiteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Site
         fields = ('id', 'group', 'name', 'description', 'user', 'password', 'url')
+
+class GroupUserPermissionSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    group = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all())
+
+    class Meta:
+        model = GroupUserPermission

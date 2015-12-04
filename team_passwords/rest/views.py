@@ -1,11 +1,10 @@
 from rest_framework import filters, status
-from rest_framework.views import APIView
 from team_passwords.filters import SiteGroupFilter
 
 __author__ = 'dracks'
 
 from team_passwords.models import Site, Group, GroupUserPermission
-from team_passwords.rest.serializers import SiteSerializer, GroupSerializer
+from team_passwords.rest.serializers import SiteSerializer, GroupSerializer, GroupUserPermissionSerializer
 from team_passwords.permissions import GroupHasPermissions, SiteHasPermissions, get_group_permissions
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -62,8 +61,6 @@ class GroupViewSet(viewsets.ModelViewSet):
                 return GroupUserPermission.get_parent_groups_read(self.request.user)
 
 
-class TestView(APIView):
-    def get(self, request, format=None):
-        snippets = Site.objects.all()
-        serializer = SiteSerializer(snippets, many=True)
-        return Response(serializer.data)
+class GroupUserPermissionViewSet(viewsets.ModelViewSet):
+    queryset = GroupUserPermission.objects.all()
+    serializer_class = GroupUserPermissionSerializer
