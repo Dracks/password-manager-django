@@ -64,3 +64,6 @@ class GroupViewSet(viewsets.ModelViewSet):
 class GroupUserPermissionViewSet(viewsets.ModelViewSet):
     queryset = GroupUserPermission.objects.all()
     serializer_class = GroupUserPermissionSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('group', 'user')
+

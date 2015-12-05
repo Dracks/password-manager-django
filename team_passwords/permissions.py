@@ -45,3 +45,11 @@ class SiteHasPermissions(permissions.IsAuthenticated):
 
             # Write permissions are only allowed to the owner of the snippet.
         return permission is not None and permission >= 2
+
+class GroupUserPermissions(permissions.IsAuthenticated):
+    def has_object_permission(self, request, view, obj):
+        permission = get_group_permissions(request.user, obj.group)
+        if request.method in permissions.SAFE_METHODS:
+            return permission is not None and permission >=2
+
+        return permission is not None and permission >= 3
