@@ -46,11 +46,15 @@ class GroupUserPermission(models.Model):
 
 
 class Site(models.Model):
+    """
+
+    """
     group = models.ForeignKey(Group, blank=True, null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     user = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+    cypher_type = models.IntegerField(default=0)
+    password = models.TextField()
     # password_crypt = fields.EncryptedTextField(blank=True)
     url = models.CharField(max_length=200, blank=True)
 
