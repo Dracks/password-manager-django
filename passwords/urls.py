@@ -47,5 +47,5 @@ urlpatterns = [
     url(r'^api-token/verify', 'rest_framework_jwt.views.verify_jwt_token'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('team_passwords.urls'))
+    url(r'^', include('passwords.core.urls'))
 ]

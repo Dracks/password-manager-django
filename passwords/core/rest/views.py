@@ -1,11 +1,11 @@
 from rest_framework import filters, status
-from team_passwords.filters import SiteGroupFilter
+from ..filters import SiteGroupFilter
 
 __author__ = 'dracks'
 
-from team_passwords.models import Site, Group, GroupUserPermission
-from team_passwords.rest.serializers import SiteSerializer, GroupSerializer, GroupUserPermissionSerializer
-from team_passwords.permissions import GroupHasPermissions, SiteHasPermissions, get_group_permissions, \
+from ..models import Site, Group, GroupUserPermission
+from .serializers import SiteSerializer, GroupSerializer, GroupUserPermissionSerializer
+from ..permissions import GroupHasPermissions, SiteHasPermissions, get_group_permissions, \
     GroupUserPermissions
 from rest_framework import viewsets
 from rest_framework.response import Response

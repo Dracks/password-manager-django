@@ -1,7 +1,7 @@
 __author__ = 'dracks'
 
-from team_passwords.models import Site, Group, GroupUserPermission
-from team_passwords.permissions import get_group_permissions
+from ..models import Site, Group, GroupUserPermission
+from ..permissions import get_group_permissions
 from rest_framework import serializers
 from django.contrib.auth.models import User
 

@@ -1,4 +1,4 @@
-from team_passwords.models import GroupUserPermission
+from .models import GroupUserPermission
 
 __author__ = 'dracks'
 

@@ -2,8 +2,8 @@ __author__ = 'dracks'
 
 from django.test import TestCase
 from django.contrib.auth.models import User
-from team_passwords import models
-from team_passwords import permissions
+from passwords.core import models
+from passwords.core import permissions
 
 class PermissionsTestCase(TestCase):
     def setUp(self):

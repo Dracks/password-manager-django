@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "sslserver",
-    'team_passwords',
+    'passwords.core',
     'rest_framework',
     'corsheaders',
     'mptt',

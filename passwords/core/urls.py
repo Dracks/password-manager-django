@@ -4,7 +4,7 @@ from django.conf.urls import include, url
 
 # from team_passwords.api.resources import SiteResource
 
-from team_passwords.rest.views import SiteViewSet, GroupViewSet, GroupUserPermissionViewSet
+from .rest.views import SiteViewSet, GroupViewSet, GroupUserPermissionViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()

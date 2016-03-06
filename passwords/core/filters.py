@@ -1,5 +1,5 @@
 from rest_framework import filters
-from team_passwords.models import Group, Site
+from .models import Group, Site
 
 __author__ = 'dracks'
 
