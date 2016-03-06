@@ -9,7 +9,12 @@ from ..permissions import GroupHasPermissions, SiteHasPermissions, get_group_per
     GroupUserPermissions
 from rest_framework import viewsets
 from rest_framework.response import Response
-from oauth2_provider.ext.rest_framework import permissions
+
+def register_endpoints(router):
+    router.register(r'sites', SiteViewSet)
+    router.register(r'groups', GroupViewSet)
+    router.register(r'group_permissions', GroupUserPermissionViewSet)
+
 
 
 def check_create_group(field, permission):
