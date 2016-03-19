@@ -4,6 +4,10 @@ It's a password manager like Team Password using django and [ember-js](https://g
 It's a simple project to learn django and emberjs, obtaining a tool that I require in a moment concrete, and teampass 
 don't work on my computer. 
 
+## Database Structure
+
+![Uml Data structure](https://raw.githubusercontent.com/Dracks/password-manager-django/master/doc/database.png)
+
 ## Requirements
 The following libraries are required
 

@@ -1,0 +1,57 @@
+@startuml
+
+skinparam monochrome true
+
+object User {
+
+}
+
+object UserKey {
+	name: char(250)
+	publicKey: text
+	privateKey: text
+}
+
+object Group {
+
+}
+
+object GroupKey {
+	publicKey: Text
+	privateKey: Text
+}
+
+note bottom
+When there is no UserKey association
+means it's the parent key, used
+to manage recursively the keys
+end note
+
+
+object GroupUserPermission {
+	permissions: Enum('read', 'write', 'admin')
+}
+
+note top
+If there isn't association, means
+the user haven't access to the group
+end note
+
+object Site {
+	name: Char(250)
+	description: Text
+	url: Char(250)
+	user: Char(250)
+	cypherType: Int
+	password: Text
+}
+
+User "1" -- "*" UserKey
+User "1" -- "*" GroupUserPermission
+GroupUserPermission "*" -- "1" Group
+Group "*" -- "1" Group : Parent
+Group "1" -- "*" Site
+Group "1" -- "*" GroupKey
+UserKey "1" -- "*" GroupKey
+
+@enduml
