@@ -19,10 +19,12 @@ from django.contrib import admin
 from rest_framework import routers
 
 from core.rest.views import register_endpoints as core_endpoints
+from accounts.rest.views import register_endpoints, MyProfileEndpoint
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 core_endpoints(router)
+cypher_endpoint(router)
 
 
 # Wire up our API using automatic URL routing.
@@ -36,5 +38,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
+    url(r'^api/me/', MyProfileEndpoint.as_view()),
     url(r'^', include('passwords.core.urls'))
 ]
