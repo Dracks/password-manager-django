@@ -8,6 +8,10 @@ don't work on my computer.
 
 ![Uml Data structure](https://raw.githubusercontent.com/Dracks/password-manager-django/master/doc/database.png)
 
+## Folder Structure
+
+![Uml Data structure](https://raw.githubusercontent.com/Dracks/password-manager-django/master/doc/folders.png)
+
 ## Requirements
 The following libraries are required
 

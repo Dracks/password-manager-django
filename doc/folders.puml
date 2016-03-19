@@ -1,0 +1,19 @@
+@startuml
+
+skinparam monochrome true
+
+@startsalt
+{
+{T
+ + /
+ ++ doc: plantuml documents
+ ++ passwords: django application
+ +++ accounts: Accounts management for the application
+ +++ core: Contains the core things. Groups & sites.
+ +++ cypher: Contains all the cypher tables
+}
+}
+@endsalt
+
+
+@enduml
