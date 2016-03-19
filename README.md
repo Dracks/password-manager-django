@@ -49,3 +49,9 @@ from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 ```
 
+## Todo
+
+* Improve accounts endpoints
+* Refactor group name to folder
+* Create endpoints for cypher models
+
