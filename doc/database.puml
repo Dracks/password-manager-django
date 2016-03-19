@@ -2,6 +2,13 @@
 
 skinparam monochrome true
 
+note as N1
+creation fields where
+used to automatically
+change all pair keys after
+certain time
+end note
+
 object User {
 
 }
@@ -10,6 +17,7 @@ object UserKey {
 	name: char(250)
 	publicKey: text
 	privateKey: text
+	creation: Date
 }
 
 object Group {
@@ -19,6 +27,7 @@ object Group {
 object GroupKey {
 	publicKey: Text
 	privateKey: Text
+	creation: Date
 }
 
 note bottom
