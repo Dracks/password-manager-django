@@ -20,9 +20,11 @@ from rest_framework import routers
 
 from core.rest.views import register_endpoints as core_endpoints
 from accounts.rest.views import register_endpoints, MyProfileEndpoint
+from cypher.rest.views import register_endpoints as cypher_endpoint
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
+register_endpoints(router)
 core_endpoints(router)
 cypher_endpoint(router)
 

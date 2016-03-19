@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'sslserver',
     'passwords.core',
     'passwords.accounts',
+    'passwords.cypher',
     'rest_framework',
     'corsheaders',
     'mptt',
