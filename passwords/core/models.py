@@ -15,7 +15,9 @@ class Group(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
     name = models.CharField(max_length=200)
     access = models.ManyToManyField(User, through='GroupUserPermission', through_fields=('group', 'user'))
-    #permissions = models.ManyToManyField(User)
+    private_key = models.TextField(null=True, blank=True)
+    public_key = models.TextField(null=True, blank=True)
+    key_creation = models.DateTimeField(auto_now_add=True, null=True)
 
     def __unicode__(self):
         return self.name

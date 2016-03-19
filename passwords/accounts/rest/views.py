@@ -2,7 +2,7 @@ from rest_framework import viewsets, views, status
 from rest_framework.response import Response
 from ...permissions import IsAdminOrReadOnly
 
-from django.contrib.auth.models import User
+from ..models import User
 from .serializers import UserSerializer
 
 def register_endpoints(router):
