@@ -34,9 +34,6 @@ cypher_endpoint(router)
 
 urlpatterns = [
     url(r'^oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    url(r'^api-token/auth', 'rest_framework_jwt.views.obtain_jwt_token'),
-    url(r'^api-token/refresh', 'rest_framework_jwt.views.refresh_jwt_token'),
-    url(r'^api-token/verify', 'rest_framework_jwt.views.verify_jwt_token'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
