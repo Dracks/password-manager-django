@@ -1,4 +1,5 @@
 from rest_framework import filters, status
+from django_filters.rest_framework import DjangoFilterBackend
 from ..filters import SiteGroupFilter
 
 __author__ = 'dracks'
@@ -111,7 +112,7 @@ class GroupUserPermissionViewSet(viewsets.ModelViewSet):
     queryset = GroupUserPermission.objects.all()
     serializer_class = GroupUserPermissionSerializer
     permission_classes = (GroupUserPermissions, )
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend,)
     filter_fields = ('group', 'user')
 
     @check_create_group('group', 3)

@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
 
 from rest_framework import routers
 
-from core.rest.views import register_endpoints as core_endpoints
-from accounts.rest.views import register_endpoints, MyProfileEndpoint
-from cypher.rest.views import register_endpoints as cypher_endpoint
+from passwords.core.rest.views import register_endpoints as core_endpoints
+from passwords.accounts.rest.views import register_endpoints, MyProfileEndpoint
+from passwords.cypher.rest.views import register_endpoints as cypher_endpoint
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -33,10 +34,10 @@ cypher_endpoint(router)
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
-    url(r'^oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include(router.urls)),
-    url(r'^api/me/', MyProfileEndpoint.as_view()),
-    url(r'^', include('passwords.core.urls'))
+    path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path('api/me/', MyProfileEndpoint.as_view()),
+    path('', include('passwords.core.urls'))
 ]
