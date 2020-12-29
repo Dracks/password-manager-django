@@ -12,7 +12,7 @@ PERMISSION_VALUES = [
 
 
 class Group(MPTTModel):
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     access = models.ManyToManyField(User, through='GroupUserPermission', through_fields=('group', 'user'))
     private_key = models.TextField(null=True, blank=True)
@@ -24,8 +24,8 @@ class Group(MPTTModel):
 
 
 class GroupUserPermission(models.Model):
-    user = models.ForeignKey(User)
-    group = models.ForeignKey(Group)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
     permission = models.IntegerField(choices=PERMISSION_VALUES)
 
     class Meta:
@@ -51,7 +51,7 @@ class Site(models.Model):
     """
 
     """
-    group = models.ForeignKey(Group, blank=True, null=True)
+    group = models.ForeignKey(Group, blank=True, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     user = models.CharField(max_length=200)

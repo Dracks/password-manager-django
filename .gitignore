@@ -1,6 +1,7 @@
 /passwords/*/migrations/
 !/passwords/core/migrations/__init__.py
 /passwords/config.py
+settings.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
