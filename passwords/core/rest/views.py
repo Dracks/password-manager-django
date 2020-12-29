@@ -22,7 +22,10 @@ def check_create_group(field, permission):
     def f(func):
         def func_call(self, request, *args, **kwargs):
             group_pk = request.data[field]
-            group_permission = get_group_permissions(request.user, Group.objects.get(pk=group_pk))
+            if request.user.is_staff:
+                group_permission = 3
+            else:
+                group_permission = get_group_permissions(request.user, Group.objects.get(pk=group_pk)) if group_pk else 0
             if group_permission >= permission:
                 return func(self, request, *args, **kwargs)
             self.permission_denied(request)

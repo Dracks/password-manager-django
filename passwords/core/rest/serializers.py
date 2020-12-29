@@ -32,3 +32,4 @@ class GroupUserPermissionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = GroupUserPermission
+        fields = '__all__'

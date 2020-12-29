@@ -38,12 +38,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
+    'rest_framework',
+    'mptt',
+    'oauth2_provider',
     'passwords.core',
     'passwords.accounts',
     'passwords.cypher',
-    'rest_framework',
-    'mptt',
-    'oauth2_provider'
 )
 
 MIDDLEWARE = (

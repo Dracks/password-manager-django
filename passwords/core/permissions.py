@@ -16,8 +16,11 @@ def get_group_permissions(user, group):
     all_permissions = []
     for g in group.get_ancestors(include_self=True):
         all_permissions.extend(g.groupuserpermission_set.filter(user=user))
+    max_permissions = 0
+    for w in map(lambda e: e.permission, all_permissions):
+        max_permissions=max(w, max_permissions)
 
-    return reduce(max, map(lambda e: e.permission, all_permissions), None)
+    return max_permissions
 
 
 class GroupHasPermissions(permissions.IsAuthenticated):
